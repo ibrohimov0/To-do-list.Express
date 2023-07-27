@@ -19,7 +19,22 @@ app.get("/admin/:id", (req,res) => {
     res.send(result)
 })
 app.post("/admin", (req,res) => {
-    console.log(req.body)
+    const schema = {
+        name: Joi.string().min(3).required(),
+        age: Joi.number().min(16).required()
+    }
+
+
+
+
+    const body = {
+        id: data.length+1,
+        name: req.body.name,
+        age: req.body.age,
+        type: req.body.type
+    }
+    data.push(body)
+    res.send(body)
 })
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}....`))

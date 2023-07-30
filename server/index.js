@@ -9,7 +9,16 @@ const data = [
     {id: 2,name: "Botir", age: 25, type: "member"},
     {id: 1,name: "Abdulloh", age: 15, type: "owner"}
 ]
-
+//
+function validateAdmin(admin) {
+    const schema = {
+        name: Joi.string().min(3).required(),
+        age: Joi.number().min(16).required(),
+        type: Joi.string().required()
+    }
+    return Joi.validate(admin, schema)
+}
+//
 app.get("/admin", (req,res) => {
     res.send(data)
 })
@@ -19,22 +28,37 @@ app.get("/admin/:id", (req,res) => {
     res.send(result)
 })
 app.post("/admin", (req,res) => {
-    const schema = {
-        name: Joi.string().min(3).required(),
-        age: Joi.number().min(16).required(),
-        type: Joi.string().required()
+    const {error} = validateAdmin(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+    const body = {
+        id: data.length+1,
+        name: req.body.name,
+        age: req.body.age,
+        type: req.body.type
     }
-    const result  = Joi.validate(req.body, schema)
-    console.log(result);
-
-    // const body = {
-    //     id: data.length+1,
-    //     name: req.body.name,
-    //     age: req.body.age,
-    //     type: req.body.type
-    // }
-    // data.push(body)
-    // res.send(body)
+    data.push(body)
+    res.send(body)
 })
 
+app.put("/admin/:id", (req,res) => {
+    const admin = data.find(c => c.id === parseInt(req.params.id))
+    if(!admin) return res.status(404).send(`Admin not found on ${req.params.id} id`)
+
+    const {error} = validateAdmin(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+
+    admin.name =req.body.name
+    admin.age = req.body.age
+    admin.type = req.body.type
+    res.send(admin)
+})
+
+app.delete("/admin/:id", (req,res) => {
+    const admin = data.find(c => c.id === parseInt(req.params.id))
+    if(!admin) return res.status(404).send(`Admin not found on ${req.params.id} id`)
+
+    const index = data.indexOf(admin)
+    data.splice(index,1)
+    res.send(admin)
+})
 app.listen(PORT, () => console.log(`Listening on ${PORT}....`))

@@ -5,11 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To do</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <h1>To Do list</h1>
-    <ul>
-        <li></li>
-    </ul>
+    <span>
+        <h1>To Do list</h1>
+        <button>+ Add new</button>
+    </span>
+    <table >
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Type</th>
+            <th>tools</th>
+        </tr>
+        <tr>
+            <td>Abdulloh</td>
+            <td>16</td>
+            <td>programmer</td>
+            <td>
+                <button class="fa-solid fa-pen"></button>
+                <button class="fa-solid fa-trash"></button>
+            </td>
+        </tr>
+        <tr>
+            <td>Abdurahmon</td>
+            <td>16</td>
+            <td>programmer</td>
+            <td>
+                <button class="fa-solid fa-pen"></button>
+                <button class="fa-solid fa-trash"></button>
+            </td>
+        </tr>
+    </table>
+    <form class="modal">
+        <h1>Add new</h1>
+        <input type="text" placeholder="Enter the name">
+        <input type="number" placeholder="Enter the age">
+        <input type="text" placeholder="Enter the type">
+        <button type="submit">Add</button>
+    </form>
+    <div class="overlay"></div>
+    <div class="message">
+        <i class=""></i><p>Error</p>
+    </div>
+    <script src="./index.js"></script>
 </body>
 </html>

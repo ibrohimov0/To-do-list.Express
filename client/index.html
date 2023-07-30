@@ -10,7 +10,7 @@
 <body>
     <span>
         <h1>To Do list</h1>
-        <button>+ Add new</button>
+        <button id="AddNew">+ Add new</button>
     </span>
     <table >
         <tr>
@@ -38,17 +38,21 @@
             </td>
         </tr>
     </table>
-    <form class="modal">
+    <form id="Modal" class="modal">
         <h1>Add new</h1>
         <input type="text" placeholder="Enter the name">
         <input type="number" placeholder="Enter the age">
         <input type="text" placeholder="Enter the type">
         <button type="submit">Add</button>
     </form>
-    <div class="overlay"></div>
-    <div class="message">
-        <i class=""></i><p>Error</p>
-    </div>
+    <form id="EditModal" class="modal">
+        <h1>Edit</h1>
+        <input type="text" placeholder="Enter the name">
+        <input type="number" placeholder="Enter the age">
+        <input type="text" placeholder="Enter the type">
+        <button type="submit">Edit</button>
+    </form>
+    <div class="overlay" id="Overlay"></div>
     <script src="./index.js"></script>
 </body>
 </html>

@@ -112,3 +112,25 @@ form button:hover{
     background-color: rgb(109, 210, 241);
     color: white;
 }
+#EditModal h1{
+    color: lightgreen; 
+ }
+#EditModal input{
+   border-color: lightgreen; 
+}
+#EditModal button{
+    color: lightgreen; 
+}
+#EditModal button:hover{
+    background-color: lightgreen;
+    color: white;
+}
+#Modal{
+    display: none;
+}
+#EditModal{
+    display: none;
+}
+#Overlay{
+    display: none;
+}

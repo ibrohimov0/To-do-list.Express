@@ -1,14 +1,13 @@
 {
   "dependencies": {
     "express": "^4.18.2",
-    "joi": "^17.9.2",
+    "joi": "^13.1.0",
     "nodemon": "^3.0.1"
   },
   "name": "server",
   "version": "1.0.0",
   "description": "To Do list on Express",
   "main": "index.js",
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -1,5 +1,5 @@
-const express = require("express")
 const Joi = require("joi")
+const express = require("express");
 const app = express()
 app.use(express.json())
 const PORT = 3000
@@ -21,20 +21,20 @@ app.get("/admin/:id", (req,res) => {
 app.post("/admin", (req,res) => {
     const schema = {
         name: Joi.string().min(3).required(),
-        age: Joi.number().min(16).required()
+        age: Joi.number().min(16).required(),
+        type: Joi.string().required()
     }
+    const result  = Joi.validate(req.body, schema)
+    console.log(result);
 
-
-
-
-    const body = {
-        id: data.length+1,
-        name: req.body.name,
-        age: req.body.age,
-        type: req.body.type
-    }
-    data.push(body)
-    res.send(body)
+    // const body = {
+    //     id: data.length+1,
+    //     name: req.body.name,
+    //     age: req.body.age,
+    //     type: req.body.type
+    // }
+    // data.push(body)
+    // res.send(body)
 })
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}....`))

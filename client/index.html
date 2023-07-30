@@ -12,7 +12,7 @@
         <h1>To Do list</h1>
         <button id="AddNew">+ Add new</button>
     </span>
-    <table >
+    <table id="Table">
         <tr>
             <th>Name</th>
             <th>Age</th>
@@ -20,23 +20,15 @@
             <th>tools</th>
         </tr>
         <tr>
-            <td>Abdulloh</td>
-            <td>16</td>
-            <td>programmer</td>
+            <td>Name</td>
+            <td>00</td>
+            <td>type</td>
             <td>
-                <button class="fa-solid fa-pen"></button>
-                <button class="fa-solid fa-trash"></button>
+                <button id="EditBtn" class="fa-solid fa-pen"></button>
+                <button id="DeleteBtn" class="fa-solid fa-trash"></button>
             </td>
         </tr>
-        <tr>
-            <td>Abdurahmon</td>
-            <td>16</td>
-            <td>programmer</td>
-            <td>
-                <button class="fa-solid fa-pen"></button>
-                <button class="fa-solid fa-trash"></button>
-            </td>
-        </tr>
+        >
     </table>
     <form id="Modal" class="modal">
         <h1>Add new</h1>
@@ -52,6 +44,9 @@
         <input type="text" placeholder="Enter the type">
         <button type="submit">Edit</button>
     </form>
+    <div id="message" class="message">
+        <i class="fa-regular fa-circle-xmark"></i><p>Error</p>
+    </div>
     <div class="overlay" id="Overlay"></div>
     <script src="./index.js"></script>
 </body>

@@ -14,6 +14,7 @@ body{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
 h1,h2,h3,h4,h5,h6{
     cursor: default;
@@ -133,4 +134,31 @@ form button:hover{
 }
 #Overlay{
     display: none;
+}
+.message{
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 4%;
+    right: -100%;
+    font-size: 1.5vw;
+    background-color: white;
+    color: rgb(253, 25, 25);
+    padding: 1.5% 2%;
+    border-radius: 1.6vw;
+    animation-name: message;
+    animation-duration: 7s;
+}
+.message i{
+    font-size: 1.6vw;
+    margin-right: .5vw;
+    margin-top: .3vw;
+}
+@keyframes message {
+    0% {right: -100%;}
+    20% {right: 2%;}
+    70% {right: 2%;}
+    100% {right: -100%;}
 }

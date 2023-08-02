@@ -1,7 +1,11 @@
 const Joi = require("joi")
 const express = require("express");
 const app = express()
+const cors = require("cors")
 app.use(express.json())
+app.use(cors({
+    origin: "http://127.0.0.1:5500"
+}))
 const PORT = 3000
 
 const data = [
@@ -19,17 +23,20 @@ function validateAdmin(admin) {
     return Joi.validate(admin, schema)
 }
 //
-app.get("/admin", (req,res) => {
+app.get("/api/admin", (req,res) => {
     res.send(data)
 })
-app.get("/admin/:id", (req,res) => {
+app.get("/api/admin/:id", (req,res) => {
     const result = data.find(c => c.id === parseInt(req.params.id))
-    if(!result) return res.status(404).send(`Admin not found on ${req.params.id} id`)
+    if(!result) return res.status(404).send({
+        status: 404,
+        message:`Admin not found on ${req.params.id} id`
+    })
     res.send(result)
 })
-app.post("/admin", (req,res) => {
+app.post("/api/admin", (req,res) => {
     const {error} = validateAdmin(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
+    if(error) return res.status(400).send({status:400,message:error.details[0].message})
     const body = {
         id: data.length+1,
         name: req.body.name,
@@ -40,9 +47,12 @@ app.post("/admin", (req,res) => {
     res.send(body)
 })
 
-app.put("/admin/:id", (req,res) => {
+app.put("/api/admin/:id", (req,res) => {
     const admin = data.find(c => c.id === parseInt(req.params.id))
-    if(!admin) return res.status(404).send(`Admin not found on ${req.params.id} id`)
+    if(!admin) return res.status(404).send({
+        status: 404,
+        message:`Admin not found on ${req.params.id} id`
+    })
 
     const {error} = validateAdmin(req.body)
     if(error) return res.status(400).send(error.details[0].message)
@@ -53,9 +63,12 @@ app.put("/admin/:id", (req,res) => {
     res.send(admin)
 })
 
-app.delete("/admin/:id", (req,res) => {
+app.delete("/api/admin/:id", (req,res) => {
     const admin = data.find(c => c.id === parseInt(req.params.id))
-    if(!admin) return res.status(404).send(`Admin not found on ${req.params.id} id`)
+    if(!admin) return res.status(404).send({
+        status: 404,
+        message:`Admin not found on ${req.params.id} id`
+    })
 
     const index = data.indexOf(admin)
     data.splice(index,1)

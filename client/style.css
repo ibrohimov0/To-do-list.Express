@@ -148,7 +148,6 @@ form button:hover{
     color: rgb(253, 25, 25);
     padding: 1.5% 2%;
     border-radius: 1.6vw;
-    animation-name: message;
     animation-duration: 7s;
 }
 .message i{

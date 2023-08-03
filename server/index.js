@@ -44,7 +44,7 @@ app.post("/api/admin", (req,res) => {
         type: req.body.type
     }
     data.push(body)
-    res.send(body)
+    res.status(200).send({status: 200,data: body})
 })
 
 app.put("/api/admin/:id", (req,res) => {
@@ -55,12 +55,12 @@ app.put("/api/admin/:id", (req,res) => {
     })
 
     const {error} = validateAdmin(req.body)
-    if(error) return res.status(400).send(error.details[0].message)
+    if(error) return res.status(400).send({status: 400,message: error.details[0].message})
 
     admin.name =req.body.name
     admin.age = req.body.age
     admin.type = req.body.type
-    res.send(admin)
+    res.status(200).send({status: 200, data: admin})
 })
 
 app.delete("/api/admin/:id", (req,res) => {
@@ -72,6 +72,6 @@ app.delete("/api/admin/:id", (req,res) => {
 
     const index = data.indexOf(admin)
     data.splice(index,1)
-    res.send(admin)
+    res.status(200).send({status: 200, data: admin})
 })
 app.listen(PORT, () => console.log(`Listening on ${PORT}....`))

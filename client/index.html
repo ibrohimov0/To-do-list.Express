@@ -21,34 +21,24 @@
                 <th>Type</th>
                 <th>tools</th>
             </tr>
-            <tr>
-                <td>0</td>
-                <td>Name</td>
-                <td>00</td>
-                <td>type</td>
-                <td>
-                    <button id="EditBtn" class="fa-solid fa-pen"></button>
-                    <button id="DeleteBtn" class="fa-solid fa-trash"></button>
-                </td>
-            </tr>
         </tbody>
     </table>
-    <form id="Modal" class="modal">
+    <form id="Modal" class="modal" >
         <h1>Add new</h1>
-        <input type="text" placeholder="Enter the name">
-        <input type="number" placeholder="Enter the age">
-        <input type="text" placeholder="Enter the type">
+        <input id="nameModal" type="text" placeholder="Enter the name">
+        <input id="ageModal" type="number" placeholder="Enter the age">
+        <input id="typeModal" type="text" placeholder="Enter the type">
         <button type="submit">Add</button>
     </form>
     <form id="EditModal" class="modal">
         <h1>Edit</h1>
-        <input type="text" placeholder="Enter the name">
-        <input type="number" placeholder="Enter the age">
-        <input type="text" placeholder="Enter the type">
+        <input id="nameEditModal" type="text" placeholder="Enter the name">
+        <input id="ageEditModal" type="number" placeholder="Enter the age">
+        <input id="typeEditModal" type="text" placeholder="Enter the type">
         <button type="submit">Edit</button>
     </form>
-    <div id="message" class="message">
-        <i class="fa-regular fa-circle-xmark"></i><p>Error</p>
+    <div class="message">
+        <i class="fa-regular fa-circle-xmark"></i><p id="message"></p>
     </div>
     <div class="overlay" id="Overlay"></div>
     <script src="./index.js"></script>

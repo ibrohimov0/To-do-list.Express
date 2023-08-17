@@ -2,11 +2,21 @@ const Joi = require("joi")
 const express = require("express");
 const app = express()
 const cors = require("cors")
+const mongoose = require("mongoose")
+const Product = require("./ProductModel/index")
+//connect MongoDb
+mongoose.connect("mongodb+srv://ibro_himov:abdulloh_070@todocluser.h9whu85.mongodb.net/")
+.then(() => {
+    console.log("Successful connected to MongoDb")
+}).catch((error) => {
+    console.error(error)
+})
+//
 app.use(express.json())
 app.use(cors({
     origin: "http://127.0.0.1:5500"
 }))
-const PORT = 3000
+const PORT = 3000;
 
 const data = [
     {id: 3,name: "Alisher", age: 17, type: "admin"},
@@ -34,17 +44,18 @@ app.get("/api/admin/:id", (req,res) => {
     })
     res.send(result)
 })
-app.post("/api/admin", (req,res) => {
+app.post("/api/admin", async (req,res) => {
     const {error} = validateAdmin(req.body)
     if(error) return res.status(400).send({status:400,message:error.details[0].message})
-    const body = {
-        id: data.length+1,
-        name: req.body.name,
-        age: req.body.age,
-        type: req.body.type
+    else{
+        try {
+            const product = await Product.create(req.body)
+            res.status(200).send({status: 200,data:product})
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({status:500,message: error.message})
+        }
     }
-    data.push(body)
-    res.status(200).send({status: 200,data: body})
 })
 
 app.put("/api/admin/:id", (req,res) => {

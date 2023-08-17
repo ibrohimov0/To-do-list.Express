@@ -88,7 +88,7 @@ Modal.addEventListener("submit", (e) => {
     MessageBox.style.animationName = ""
     const body = {
         name: nameModal.value,
-        age: ageModal.value,
+        age: parseInt(ageModal.value),
         type: typeModal.value
     }
     PostData(body).then(res => {

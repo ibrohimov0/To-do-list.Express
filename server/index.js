@@ -33,16 +33,24 @@ function validateAdmin(admin) {
     return Joi.validate(admin, schema)
 }
 //
-app.get("/api/admin", (req,res) => {
-    res.send(data)
+app.get("/api/admin", async(req,res) => {
+    try {
+        const product = await Product.find({})
+        res.status(200).send(product)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({status:500,message: error.message})
+    }
 })
-app.get("/api/admin/:id", (req,res) => {
-    const result = data.find(c => c.id === parseInt(req.params.id))
-    if(!result) return res.status(404).send({
-        status: 404,
-        message:`Admin not found on ${req.params.id} id`
-    })
-    res.send(result)
+app.get("/api/admin/:id", async(req,res) => {
+    try {
+        const {id} = req.params
+        const product = await Product.findById(id)
+        res.status(200).send(product)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({status:500,message: error.message})
+    }
 })
 app.post("/api/admin", async (req,res) => {
     const {error} = validateAdmin(req.body)
@@ -58,31 +66,31 @@ app.post("/api/admin", async (req,res) => {
     }
 })
 
-app.put("/api/admin/:id", (req,res) => {
-    const admin = data.find(c => c.id === parseInt(req.params.id))
-    if(!admin) return res.status(404).send({
-        status: 404,
-        message:`Admin not found on ${req.params.id} id`
-    })
-
+app.put("/api/admin/:id", async(req,res) => {
     const {error} = validateAdmin(req.body)
     if(error) return res.status(400).send({status: 400,message: error.details[0].message})
-
-    admin.name =req.body.name
-    admin.age = req.body.age
-    admin.type = req.body.type
-    res.status(200).send({status: 200, data: admin})
+    else{
+        try {
+            const {id} = req.params
+            const product = await Product.findByIdAndUpdate(id, req.body)
+            if(!product) return res.status(404).send({status: 404,message: "Admin not found on id"})
+            res.status(200).send({status: 200, data: product})
+        } catch (error) {
+            console.log(error)
+            res.status(500).send({status:500,message: error.message})
+        }
+    }
 })
 
-app.delete("/api/admin/:id", (req,res) => {
-    const admin = data.find(c => c.id === parseInt(req.params.id))
-    if(!admin) return res.status(404).send({
-        status: 404,
-        message:`Admin not found on ${req.params.id} id`
-    })
-
-    const index = data.indexOf(admin)
-    data.splice(index,1)
-    res.status(200).send({status: 200, data: admin})
+app.delete("/api/admin/:id", async(req,res) => {
+    try {
+        const {id} = req.params
+        const product = await Product.findByIdAndDelete(id)
+        if(!product) return res.status(404).send({status: 404,message: "Admin not found on id"})
+        res.status(200).send({status: 200, data: product})
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({status:500,message: error.message})
+    }
 })
 app.listen(PORT, () => console.log(`Listening on ${PORT}....`))

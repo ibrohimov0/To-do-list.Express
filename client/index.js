@@ -68,14 +68,14 @@ async function DeleteData(id) {
 //
 GetData().then(res => res.map((e) => {
     const tr = document.createElement('tr')
-    tr.id = e.id
-    Object.values(e).map((el) => {
+    tr.id = e._id
+    for (let i = 1; i < 4; i++) {
         const td = document.createElement('td')
-        td.textContent = el
+        td.textContent = Object.values(e)[i]
         tr.append(td)
-    })
-    const toolDel = document.createElement("button");toolDel.id = "DeleteBtn";toolDel.className = "fa-solid fa-trash";toolDel.value = e.id;
-    const toolEdt = document.createElement("button");toolEdt.id = "EditBtn";toolEdt.className = "fa-solid fa-pen";toolEdt.value = e.id;
+    }   
+    const toolDel = document.createElement("button");toolDel.id = "DeleteBtn";toolDel.className = "fa-solid fa-trash";toolDel.value = e._id;
+    const toolEdt = document.createElement("button");toolEdt.id = "EditBtn";toolEdt.className = "fa-solid fa-pen";toolEdt.value = e._id;
     toolEdt.addEventListener("click", (e) => {OpenEditModal();window.localStorage.setItem("editId", e.target.value)})
     toolDel.addEventListener("click", (e) => DeleteItem(e.target.value))
     const tools = document.createElement("td");
